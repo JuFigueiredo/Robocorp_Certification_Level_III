@@ -5,7 +5,7 @@ tasks:
     robotTaskName: Consume traffic data work items
 
 condaConfigFile: conda.yaml
-artifactsDir: inhuman-insurance-inc-ais-robot\output
+artifactsDir: output
 PATH:
   - .
 PYTHONPATH:
