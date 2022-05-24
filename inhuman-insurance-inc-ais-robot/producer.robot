@@ -4,8 +4,8 @@ Documentation       Inhuman Insurance, Inc. Artificial Intelligence System robot
 
 Library             Collections
 Library             RPA.Tables
-
 Resource            shared.robot
+
 
 *** Variables ***
 ${TRAFFIC_JSON_FILE_PATH}=      ${OUTPUT_DIR}${/}traffic.json

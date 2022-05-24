@@ -3,7 +3,6 @@ Documentation       Inhuman Insurance, Inc. Artificial Intelligence System robot
 ...                 Shared settings and code.
 
 Library             RPA.JSON
-Library             RPA.HTTP
 Library             RPA.Robocorp.WorkItems
 
 

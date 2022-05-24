@@ -4,6 +4,7 @@ Documentation       Inhuman Insurance, Inc. Artificial Intelligence System robot
 
 Resource            shared.robot
 
+
 *** Tasks ***
 Consume traffic data work items
     For Each Input Work Item    Process traffic data
@@ -19,38 +20,38 @@ Process traffic data
     ELSE
         Handle invalid traffic data    ${traffic_data}
     END
-    
+
 Validate traffic data
     [Arguments]    ${traffic_data}
-    ${country}=    Get value from JSON    doc=${traffic_data}    expr=$.country
+    ${country}=    Get Value From Json    ${traffic_data}    $.country
     ${valid}=    Evaluate    len("${country}") == 3
     RETURN    ${valid}
-    
+
 Post traffic data to sales system
     [Arguments]    ${traffic_data}
-    ${status}    ${return}=    Run Keyword And Ignore Error    
-    ...    POST    
+    ${status}    ${return}=    Run Keyword And Ignore Error
+    ...    POST
     ...    https://robocorp.com/inhuman-insurance-inc/sales-system-api
     ...    json=${traffic_data}
     Handle traffic API response    ${status}    ${return}    ${traffic_data}
 
 Handle traffic API response
     [Arguments]    ${status}    ${return}    ${traffic_data}
-    IF    "${status}" == "PASS"    
+    IF    "${status}" == "PASS"
         Handle traffic API OK response
     ELSE
         Handle traffic API error response    ${return}    ${traffic_data}
-    END 
+    END
 
 Handle traffic API OK response
     Release Input Work Item    DONE
 
 Handle traffic API error response
     [Arguments]    ${return}    ${traffic_data}
-    Log    
-    ...    Traffic data posting failed:    ${traffic_data} ${return}
+    Log
+    ...    Traffic data posting failed: ${traffic_data} ${return}
     ...    ERROR
-    Release Input Work Item    
+    Release Input Work Item
     ...    state=FAILED
     ...    exception_type=APPLICATION
     ...    code=TRAFFIC_DATA_POST_FAILED
@@ -59,8 +60,8 @@ Handle traffic API error response
 Handle invalid traffic data
     [Arguments]    ${traffic_data}
     ${message}=    Set Variable    Invalid traffic data: ${traffic_data}
-    Log    ${message}    level=WARN
-    Release Input Work Item    
+    Log    ${message}    WARN
+    Release Input Work Item
     ...    state=FAILED
     ...    exception_type=BUSINESS
     ...    code=INVALID_TRAFFIC_DATA
